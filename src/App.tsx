@@ -5,26 +5,23 @@ import "./App.css";
 import { Todo } from "./contents/todo/main";
 import { About } from "./contents/about/main";
 import { SVG } from "./contents/svg/main";
+import { Index } from "./contents/index/main";
+import { NotFound } from "./contents/notfound/main";
 
 const history = createBrowserHistory();
 
-function App() {
+export default function App() {
   return (
     <>
       <Router history={history}>
         <Switch>
-          <Route path="/svg">
-            <SVG />
-          </Route>
-          <Route path="/todo">
-            <Todo />
-          </Route>
-          <Route path="/master">
-            <About />
-          </Route>
+          <Route exact path="/" component={Index} />
+          <Route path="/svg" component={SVG} />
+          <Route path="/todo" component={Todo} />
+          <Route path="/about" component={About} />
+          <Route component={NotFound} />
         </Switch>
       </Router>
     </>
   );
 }
-export default App;
