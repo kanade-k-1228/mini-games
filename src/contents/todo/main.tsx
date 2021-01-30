@@ -5,7 +5,7 @@ interface Item {
   name: string;
 }
 
-export const Editor: React.FC = (): JSX.Element => {
+export const Todo: React.FC = (): JSX.Element => {
   const [text, setText] = React.useState<string>("");
   const [items, setItems] = React.useState<Item[]>([]);
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

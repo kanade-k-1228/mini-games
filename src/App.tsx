@@ -2,8 +2,9 @@ import React from "react";
 import { Route, Router, Switch } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import "./App.css";
-import { Editor } from "./components/editor/main";
-import { Master } from "./components/master";
+import { Todo } from "./contents/todo/main";
+import { About } from "./contents/about/main";
+import { SVG } from "./contents/svg/main";
 
 const history = createBrowserHistory();
 
@@ -12,11 +13,14 @@ function App() {
     <>
       <Router history={history}>
         <Switch>
-          <Route path="/editor">
-            <Editor />
+          <Route path="/svg">
+            <SVG />
+          </Route>
+          <Route path="/todo">
+            <Todo />
           </Route>
           <Route path="/master">
-            <Master />
+            <About />
           </Route>
         </Switch>
       </Router>
