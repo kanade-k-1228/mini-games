@@ -1,12 +1,12 @@
 export function Index() {
   return (
     <>
-      <div>index</div>
-      <li>
-        <a href="./svg">svg</a>
-      </li>
+      <h1>Kanade's Mini Games</h1>
       <li>
         <a href="./todo">todo</a>
+      </li>
+      <li>
+        <a href="./post-it">post-it</a>
       </li>
       <li>
         <a href="./about">about</a>

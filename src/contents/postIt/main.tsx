@@ -1,6 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { ItemView as ItemComponent } from "./itemview";
+import { Item } from "./types";
 
-export function SVG() {
+export function PostIt() {
   const [mousePositionX, setMousePositionX] = useState<number>(0);
   const [mousePoitionY, setMousePositionY] = useState<number>(0);
   const [svgPositionX, setSvgPositionX] = useState<number>(0);
@@ -18,11 +20,8 @@ export function SVG() {
     setMousePositionX(e.pageX - svgPositionX);
     setMousePositionY(e.pageY - svgPositionY);
   }
-
-  const [dots, setDots] = useState<Array<{ x: number; y: number }>>([]);
-  function setCookie() {
-    document.cookie = JSON.stringify(dots);
-  }
+  const [idCounter, setIdCounter] = useState<number>(0);
+  const [items, setItems] = useState<Item[]>([]);
 
   return (
     <>
@@ -36,15 +35,34 @@ export function SVG() {
           onMouseMove={(e) => {
             updateMousePosition(e);
           }}
-          onClick={() => {
-            setDots(dots.concat({ x: mousePositionX, y: mousePoitionY }));
-          }}
           onDoubleClick={() => {
-            setCookie();
+            setIdCounter(idCounter + 1);
+            setItems(
+              items.concat({
+                id: idCounter,
+                x: mousePositionX,
+                y: mousePoitionY,
+                text: "",
+              })
+            );
           }}
         >
-          {dots.map((dot) => (
-            <circle cx={dot.x} cy={dot.y} r="4" />
+          {items.map((item) => (
+            <>
+              <ItemComponent
+                item={item}
+                delete={() => {
+                  setItems(items.filter((item2) => item2.id !== item.id));
+                }}
+                edit={(text: string) => {
+                  setItems(
+                    items.map((item2) =>
+                      item2.id !== item.id ? item2 : { ...item2, text: text }
+                    )
+                  );
+                }}
+              />
+            </>
           ))}
         </svg>
       </div>
